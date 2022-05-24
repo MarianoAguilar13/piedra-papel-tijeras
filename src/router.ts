@@ -4,7 +4,11 @@ import { initPageGame } from "./pages/game/index";
 import { initPageResult } from "./pages/result/index";
 import { initPageResultScore } from "./pages/result-score/index";
 
+//Este es el nombre base de la pag de github
 const BASE_PATH = "/piedra-papel-tijeras";
+
+/*Establezco las diferentes rutas y dependiendo la ruta es la pag
+que va a cargar, estas paginas estan en la carpeta pages */
 
 function isGithubPages() {
   return location.host.includes("github.io");
@@ -57,11 +61,6 @@ export function initRouter(container: Element) {
           container.removeChild(container.firstChild);
         }
 
-        /*
-        if (container.firstChild) {
-          container.firstChild.remove();
-        }
-*/
         container.appendChild(el);
       }
     }

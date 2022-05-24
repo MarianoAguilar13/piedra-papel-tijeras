@@ -1,7 +1,6 @@
 {
   "name": "desafio-final",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "devDependencies": {
     "gh-pages": "^4.0.0",
@@ -11,5 +10,8 @@
     "dev": "parcel serve ./src/index.html",
     "build": "parcel build ./src/index.html --dist-dir build --public-url /piedra-papel-tijeras",
     "deploy": "gh-pages -d build"
+  },
+  "dependencies": {
+    "gh-pages": "^4.0.0"
   }
 }

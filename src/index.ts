@@ -5,12 +5,6 @@ import { init as initButtonNormalEl } from "./components/boton-normal-el";
 import { init as initPapelEl } from "./components/papel-el";
 import { init as initPiedraEl } from "./components/piedra-el";
 import { init as initTijerasEl } from "./components/tijeras-el";
-/*import { init as initTijerasGrandesEl } from "./components/tijeras-grandes-el";
-import { init as initPapelGrandeEl } from "./components/papel-grande-el";
-import { init as initPiedraGrandeEl } from "./components/piedra-grande-el";
-import { init as initTijerasComputerEl } from "./components/tijeras-computer-el";
-import { init as initPapelComputerEl } from "./components/papel-computer-el";
-import { init as initPiedraComputerEl } from "./components/piedra-computer-el";*/
 import { init as initResultScoreEl } from "./components/result-score-el";
 
 (function () {
@@ -18,13 +12,10 @@ import { init as initResultScoreEl } from "./components/result-score-el";
   initPapelEl();
   initPiedraEl();
   initTijerasEl();
-  /* initTijerasGrandesEl();
-  initPapelGrandeEl();
-  initPiedraGrandeEl();
-  initTijerasComputerEl();
-  initPapelComputerEl();
-  initPiedraComputerEl();*/
   initResultScoreEl();
+
+  /* El localStorage, "history" se suscribe en el state, para que este
+  el history se mantenga actualizado con el historial */
 
   state.subscribe(() => {
     const actualState = state.getState();
@@ -34,6 +25,8 @@ import { init as initResultScoreEl } from "./components/result-score-el";
     console.log(localStorage.getItem("history"));
   });
 
+  /*Cuando ingresa a la pag si tiene un historial guardao el localstorage
+  entonces lo carga al state para que tenga el historial de jugadas actualizado */
   if (localStorage.getItem("history") == undefined) {
   } else {
     let historialDeJugadas = {
@@ -47,6 +40,7 @@ import { init as initResultScoreEl } from "./components/result-score-el";
     state.setState(historialDeJugadas);
   }
 
+  /* Inicia el initRouter para cargar los elementos*/
   const root = document.querySelector(".root");
   initRouter(root);
 })();

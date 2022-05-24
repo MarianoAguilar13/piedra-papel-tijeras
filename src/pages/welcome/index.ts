@@ -14,14 +14,14 @@ export function initPageWelcome(params) {
   let style = document.createElement("style");
   style.textContent = `
                     .container {
-                        height: 1vh;
+                        height: 100vh;
                         width: 100%;
                         padding: 0 30px;
                     }
                     
                     @media (min-width: 600px) {
                         .container {
-                        height: 0.8vh;
+                        height: 80vh;
                         width: 450px;
                         margin: 0 auto;
                         }

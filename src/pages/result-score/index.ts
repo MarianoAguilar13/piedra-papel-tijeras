@@ -3,19 +3,27 @@ import { state } from "../../state";
 export function initPageResultScore(params) {
   const div = document.createElement("div");
 
+  //me traigo la data del ultimo state
   const newData = state.getState();
 
+  //guardo el ultimo game y las jugadas del ultimo game
   const nuevoGame = newData.currentGame;
   const jugadaCompu = nuevoGame.computerPlay;
   const jugadaPlayer = nuevoGame.myPlay;
 
+  //whoWins es un metodo del state que nos permite ver quien gano
+  //pasandole 2 jugadas, luego guardo ese resultado
   const resultMatch = state.whoWins(jugadaPlayer, jugadaCompu);
 
+  //me guardo el historial para recorrer y calcular el score total
   const historyRecorrer = newData.history;
   console.log("el historial", historyRecorrer);
 
   let winCompu = 0;
   let winPlayer = 0;
+
+  //recorro el historial y veo quien gano cada game, luego las victorias
+  //del player las guardo en una variable y las de la pc tambien
   for (const gameActual of historyRecorrer) {
     console.log(gameActual);
 
@@ -32,6 +40,8 @@ export function initPageResultScore(params) {
     }
   }
 
+  //aca muestro con resultMatch, con winPlayer y WinCompu, quien
+  //gano la ultima partida y cuantas victorias de cada uno
   div.innerHTML = `
     <div class="container">
         <result-escore-el quienGano="${resultMatch}" numVos="${winPlayer}" numMaquina="${winCompu}" ></result-escore-el>
@@ -43,14 +53,14 @@ export function initPageResultScore(params) {
   let style = document.createElement("style");
   style.textContent = `
                           .container {
-                              height: 1vh;
+                              height: 100vh;
                               width: 100%;
                               
                           }
                           
                           @media (min-width: 600px) {
                               .container {
-                              min-height: 0.8vh;
+                              min-height: 80vh;
                               width: 450px;
                               margin: 0 auto;
                               }
@@ -64,6 +74,7 @@ export function initPageResultScore(params) {
                         `;
   div.appendChild(style);
 
+  //este boton vuelve a instrucciones para comenzar un nuevo game
   const botonVolverEl = div.querySelector(".boton-volver");
 
   botonVolverEl.addEventListener("click", (e) => {
@@ -71,6 +82,7 @@ export function initPageResultScore(params) {
     params.goTo("./instructions");
   });
 
+  //con este boton reiniciamos el historial
   const botonReinicioEl = div.querySelector(".boton-reinicio");
 
   botonReinicioEl.addEventListener("click", (e) => {

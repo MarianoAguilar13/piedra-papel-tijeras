@@ -1,4 +1,7 @@
 export function computerJuego() {
+  /*Esta funcion genera "aleatoriamente" una jugada de la compu
+  para que despues matchee con la del player */
+
   type Jugada = "piedra" | "papel" | "tijeras";
 
   let min = 0;

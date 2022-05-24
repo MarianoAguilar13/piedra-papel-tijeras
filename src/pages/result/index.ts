@@ -1,41 +1,42 @@
 import { state } from "../../state";
 
 export function initPageResult(params) {
+  //invoco la data del state
   const newData = state.getState();
 
+  //guardo la ultima jugada
   const nuevoGame = newData.currentGame;
 
+  //este div es que que va a contener la jugada del playe, de la pc
+  //y tambien el boton del score
   const div = document.createElement("div");
   div.classList.add("container-result");
 
-  // let jugadaCompuImgEl = document.createElement("div");
-  // let jugadaPlayerImgEl = document.createElement("div");
-
+  /*Por cada if verifica que jugo la computadora y el player  
+  depende que jugaron se crea un elemento img y se carga la imagen
+  correspondiente*/
   if (nuevoGame.computerPlay == "piedra") {
-    //const jugadaCompuImgEl = document.createElement("piedra-computer-el");
     const jugadaCompuImgEl = document.createElement("img");
     jugadaCompuImgEl.src =
       "https://marianoaguilar13.github.io/imagenes-proyecto-final/piedra-invertido.png";
     jugadaCompuImgEl.classList.add("jugada-compu");
-    // jugadaCompuImgEl.appendChild(jugadaEl);
+
     div.appendChild(jugadaCompuImgEl);
   }
   if (nuevoGame.computerPlay == "papel") {
-    //const jugadaCompuImgEl = document.createElement("papel-computer-el");
     const jugadaCompuImgEl = document.createElement("img");
     jugadaCompuImgEl.src =
       "https://marianoaguilar13.github.io/imagenes-proyecto-final/papel-invertido.png";
     jugadaCompuImgEl.classList.add("jugada-compu");
-    // jugadaCompuImgEl.appendChild(jugadaEl);
+
     div.appendChild(jugadaCompuImgEl);
   }
   if (nuevoGame.computerPlay == "tijeras") {
-    //const jugadaCompuImgEl = document.createElement("tijeras-computer-el");
     const jugadaCompuImgEl = document.createElement("img");
     jugadaCompuImgEl.src =
       "https://marianoaguilar13.github.io/imagenes-proyecto-final/tijera-invertido.png";
     jugadaCompuImgEl.classList.add("jugada-compu");
-    //jugadaCompuImgEl.appendChild(jugadaEl);
+
     div.appendChild(jugadaCompuImgEl);
   }
 
@@ -53,7 +54,7 @@ export function initPageResult(params) {
     jugadaPlayerImgEl.src =
       "https://marianoaguilar13.github.io/imagenes-proyecto-final/piedra.svg";
     jugadaPlayerImgEl.classList.add("jugada-player");
-    //jugadaPlayerImgEl.appendChild(jugadaEl);
+
     div.appendChild(jugadaPlayerImgEl);
   }
   if (nuevoGame.myPlay == "papel") {
@@ -61,7 +62,7 @@ export function initPageResult(params) {
     jugadaPlayerImgEl.src =
       "https://marianoaguilar13.github.io/imagenes-proyecto-final/papel.svg";
     jugadaPlayerImgEl.classList.add("jugada-player");
-    // jugadaPlayerImgEl.appendChild(jugadaEl);
+
     div.appendChild(jugadaPlayerImgEl);
   }
   if (nuevoGame.myPlay == "tijeras") {
@@ -69,7 +70,7 @@ export function initPageResult(params) {
     jugadaPlayerImgEl.src =
       "https://marianoaguilar13.github.io/imagenes-proyecto-final/tijera.svg";
     jugadaPlayerImgEl.classList.add("jugada-player");
-    //jugadaPlayerImgEl.appendChild(jugadaEl);
+
     div.appendChild(jugadaPlayerImgEl);
   }
 
@@ -77,7 +78,7 @@ export function initPageResult(params) {
   style.textContent = `
                         .container-result {
                           display: flex;
-                          min-height: 1vh;
+                          min-height: 100vh;
                           width: 100%;
                           justify-content: space-between;
                           flex-direction: column;

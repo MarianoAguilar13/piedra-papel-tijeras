@@ -2,6 +2,8 @@ import { state } from "../../state";
 import { computerJuego } from "../../computerPlay";
 
 export function initPageGame(params) {
+  type Jugada = "piedra" | "papel" | "tijeras";
+
   const div = document.createElement("div");
   div.innerHTML = `
                 <div class="container">
@@ -16,14 +18,14 @@ export function initPageGame(params) {
   let style = document.createElement("style");
   style.textContent = `
                         .container {
-                            height: 1vh;
+                            height: 100vh;
                             width: 100%;
                             padding: 0 30px;
                         }
                         
                         @media (min-width: 600px) {
                             .container {
-                            height: 0.8vh;
+                            height: 80vh;
                             width: 450px;
                             margin: 0 auto;
                             }
@@ -79,12 +81,18 @@ export function initPageGame(params) {
 
   function timerJugada() {
     let counter = 0;
+
+    //este div me mostrara en pantalla la cuenta regresiva
     const cuentaRegresiva = div.querySelector(".container-cuenta-regresiva");
 
     const intervalId = setInterval(() => {
       counter++;
 
       console.log("ciclo número", counter);
+
+      //Cuenta regresiva
+      /*Creo que el error esta aca, deberia comenzar de 0
+      para que no me cuente una jugada extra */
 
       if (counter == 1) {
         cuentaRegresiva.textContent = "3";
@@ -96,6 +104,9 @@ export function initPageGame(params) {
         cuentaRegresiva.textContent = "1";
       }
 
+      /* Si pasan mas de 3 segundos osea 4 se corta la funcion
+      y vuelve a instrucciones porque si llego a 4 significa
+      que no eligieron antes de los 4seg */
       if (counter > 3) {
         clearInterval(intervalId);
         params.goTo("./instructions");
@@ -105,10 +116,27 @@ export function initPageGame(params) {
 
       piedraEl.addEventListener("click", (e) => {
         e.preventDefault();
-        piedraEl.setAttribute("style", "bottom:-25px;");
 
-        //Agrego al state mi jugada y la jugada de la compu
-        //tambien la pusheo en el historial
+        /*cuando hace click, la jugada elegida, se guarda en el state
+        y calcula la jugada de la compu con la funcion computerJuego
+        luego guarda la jugada en ultima jugada y pushea la nueva jugada
+        en el state de history*/
+
+        let myJugada: Jugada;
+        const newData = state.getState();
+        const jugadaCompu = computerJuego();
+        myJugada = "piedra";
+        newData.currentGame.myPlay = myJugada;
+        newData.currentGame.computerPlay = jugadaCompu;
+        let nuevaJugada = {
+          computerPlay: jugadaCompu,
+          myPlay: myJugada,
+        };
+        state.setState(newData);
+        state.pushToHistory(nuevaJugada);
+
+        /*Cuando clickea la mano, termina el conteo y va a resultados
+        la logica del state queda en el elemento piedra */
 
         params.goTo("./result");
         clearInterval(intervalId);
@@ -118,11 +146,26 @@ export function initPageGame(params) {
 
       tijerasEl.addEventListener("click", (e) => {
         e.preventDefault();
-        tijerasEl.setAttribute("style", "bottom:-25px;");
-        console.log("se apreto en tijeras");
+        /*cuando hace click, la jugada elegida, se guarda en el state
+        y calcula la jugada de la compu con la funcion computerJuego
+        luego guarda la jugada en ultima jugada y pushea la nueva jugada
+        en el state de history*/
 
-        //Agrego al state mi jugada y la jugada de la compu
-        //tambien la pusheo en el historial
+        let myJugada: Jugada;
+        const newData = state.getState();
+        const jugadaCompu = computerJuego();
+        myJugada = "tijeras";
+        newData.currentGame.myPlay = myJugada;
+        newData.currentGame.computerPlay = jugadaCompu;
+        let nuevaJugada = {
+          computerPlay: jugadaCompu,
+          myPlay: myJugada,
+        };
+        state.setState(newData);
+        state.pushToHistory(nuevaJugada);
+
+        /*Cuando clickea la mano, termina el conteo y va a resultados
+        la logica del state queda en el elemento tijeras */
 
         params.goTo("./result");
         clearInterval(intervalId);
@@ -132,54 +175,31 @@ export function initPageGame(params) {
 
       papelEl.addEventListener("click", (e) => {
         e.preventDefault();
-        papelEl.setAttribute("style", "bottom:-25px;");
-        console.log("se apreto en papel");
+        /*cuando hace click, la jugada elegida, se guarda en el state
+        y calcula la jugada de la compu con la funcion computerJuego
+       luego guarda la jugada en ultima jugada y pushea la nueva jugada
+       en el state de history*/
 
-        //Agrego al state mi jugada y la jugada de la compu
-        //tambien la pusheo en el historial
+        let myJugada: Jugada;
+        const newData = state.getState();
+        const jugadaCompu = computerJuego();
+        myJugada = "papel";
+        newData.currentGame.myPlay = myJugada;
+        newData.currentGame.computerPlay = jugadaCompu;
+        let nuevaJugada = {
+          computerPlay: jugadaCompu,
+          myPlay: myJugada,
+        };
+        state.setState(newData);
+        state.pushToHistory(nuevaJugada);
+
+        /*Cuando clickea la mano, termina el conteo y va a resultados
+    la logica del state queda en el elemento papel */
 
         params.goTo("./result");
         clearInterval(intervalId);
       });
     }, 1000);
-
-    /* const piedraEl = document.querySelector(".piedra-img");
-
-    piedraEl.addEventListener("click", (e) => {
-      e.preventDefault();
-      piedraEl.setAttribute("style", "bottom:-25px;");
-
-      params.goTo("./result");
-      clearInterval(intervalId);
-    });
-
-    const tijerasEl = document.querySelector(".tijeras-img");
-
-    tijerasEl.addEventListener("click", (e) => {
-      e.preventDefault();
-      tijerasEl.setAttribute("style", "bottom:-25px;");
-      console.log("se apreto en tijeras");
-
-      //Agrego al state mi jugada y la jugada de la compu
-      //tambien la pusheo en el historial
-
-      params.goTo("./result");
-      clearInterval(intervalId);
-    });
-
-    const papelEl = document.querySelector(".papel-img");
-
-    papelEl.addEventListener("click", (e) => {
-      e.preventDefault();
-      papelEl.setAttribute("style", "bottom:-25px;");
-      console.log("se apreto en papel");
-
-      //Agrego al state mi jugada y la jugada de la compu
-      //tambien la pusheo en el historial
-
-      params.goTo("./result");
-      clearInterval(intervalId);
-    });*/
   }
 
   timerJugada();

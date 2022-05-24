@@ -26,9 +26,6 @@ export function init() {
                     }
                         
                 `;
-      //shadow DOM, todo lo que pasa adentro del componente, se puede crear
-      //css que solo va a estar dentro del componente HeaderEl, el mode open
-      //es para inspeccionar
 
       const buttonEl = document.createElement("button");
       buttonEl.classList.add("boton");

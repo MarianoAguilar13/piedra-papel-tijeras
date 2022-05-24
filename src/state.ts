@@ -49,9 +49,8 @@ const state = {
     }
   },
 
-  //meti aca el localStorage porque me traia complicaciones
-  //con respecto al timer ya que me modifica el state por cada
-  //segundo que paso dentro del timer
+  /*Aca pushea la nueva jugada acumulandola en el historial de jugada
+  ya que este historial es que se va a recorrer para calcular el score */
 
   pushToHistory(play: Game) {
     const currentState = this.getState();
@@ -61,6 +60,7 @@ const state = {
     this.setState(currentState);
   },
 
+  //devuelve la data del ultimo state
   getState() {
     return this.data;
   },
