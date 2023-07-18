@@ -65,7 +65,7 @@ const state = {
     return this.data;
   },
 
-  subscribe(callback: (any) => any) {
+  subscribe(callback) {
     // recibe callbacks para ser avisados posteriormente
     this.listeners.push(callback);
   },
