@@ -25,8 +25,7 @@ import { init as initResultScoreEl } from "./components/result-score-el";
 
   /*Cuando ingresa a la pag si tiene un historial guardao el localstorage
   entonces lo carga al state para que tenga el historial de jugadas actualizado */
-  if (localStorage.getItem("history") == undefined) {
-  } else {
+  if (localStorage.getItem("history")!) {
     let historialDeJugadas = {
       currentGame: {
         computerPlay: "",
