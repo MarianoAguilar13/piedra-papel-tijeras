@@ -8,8 +8,9 @@
   },
   "scripts": {
     "dev": "parcel serve ./src/index.html",
-    "build": "parcel build ./src/index.html --dist-dir build --public-url /piedra-papel-tijeras",
-    "deploy": "gh-pages -d build"
+    "build": "parcel build ./src/index.html --dist-dir build",
+    "deploy": "gh-pages -d build",
+    "start": "parcel serve ./src/index.html"
   },
   "dependencies": {
     "gh-pages": "^5.0.0",
